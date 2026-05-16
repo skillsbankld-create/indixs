@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills Bank | Stakeholders Showdown</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#06041A;
+color:white;
+overflow-x:hidden;
+}
+
+:root{
+--primary:#0F0C3F;
+--secondary:#19156A;
+--card:#15124E;
+--success:#00D084;
+--danger:#FF5B7A;
+--warning:#FFB84D;
+}
+
+.screen{
+display:none;
+min-height:100vh;
+padding:50px 8%;
+}
+
+.active{
+display:flex;
+}
+
+.center{
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+}
+
+.hero{
+background:
+linear-gradient(rgba(6,4,26,.9),rgba(6,4,26,.96)),
+url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+}
+
+.logo{
+width:180px;
+margin-bottom:30px;
+}
+
+h1{
+font-size:72px;
+font-weight:800;
+margin-bottom:20px;
+}
+
+.subtitle{
+font-size:22px;
+line-height:1.9;
+max-width:1000px;
+opacity:.92;
+margin-bottom:40px;
+}
+
+.btn{
+padding:18px 35px;
+border:none;
+border-radius:14px;
+background:white;
+color:#11103D;
+font-size:18px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-5px);
+}
+
+.intro-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+width:100%;
+margin-top:40px;
+}
+
+.intro-card{
+background:linear-gradient(145deg,#121046,#1B176A);
+padding:30px;
+border-radius:24px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:20px;
+margin-bottom:30px;
+}
+
+.metrics{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.metric{
+background:#17145A;
+padding:15px 18px;
+border-radius:14px;
+font-weight:700;
+}
+
+.progress{
+height:12px;
+background:#222;
+border-radius:20px;
+overflow:hidden;
+margin-top:12px;
+}
+
+.bar{
+height:100%;
+width:0%;
+background:white;
+transition:.4s;
+}
+
+.warning{
+background:linear-gradient(145deg,#4F173E,#70214C);
+padding:20px;
+border-radius:18px;
+margin-bottom:25px;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.01)}
+100%{transform:scale(1)}
+}
+
+.scenario{
+background:linear-gradient(145deg,#121046,#1B176A);
+padding:40px;
+border-radius:28px;
+margin-bottom:25px;
+}
+
+.scenario h2{
+font-size:38px;
+margin-bottom:18px;
+}
+
+.scenario p{
+font-size:20px;
+line-height:2;
+}
+
+.choice{
+background:#231F7A;
+padding:22px;
+border-radius:18px;
+margin-bottom:15px;
+cursor:pointer;
+transition:.3s;
+border:2px solid transparent;
+}
+
+.choice:hover{
+transform:translateX(8px);
+border-color:white;
+}
+
+.feedback{
+display:none;
+padding:25px;
+border-radius:20px;
+margin-top:20px;
+font-size:18px;
+line-height:1.8;
+}
+
+.good{
+background:rgba(0,208,132,.15);
+border:1px solid var(--success);
+}
+
+.bad{
+background:rgba(255,91,122,.15);
+border:1px solid var(--danger);
+}
+
+.badge-popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#17145A;
+padding:40px;
+border-radius:24px;
+text-align:center;
+display:none;
+z-index:999;
+border:2px solid white;
+width:90%;
+max-width:700px;
+}
+
+.badge-popup h2{
+font-size:48px;
+margin-bottom:15px;
+}
+
+.results-box{
+background:linear-gradient(145deg,#121046,#1B176A);
+padding:50px;
+border-radius:30px;
+max-width:1100px;
+margin:auto;
+}
+
+.results-box h2{
+font-size:56px;
+margin-bottom:25px;
+}
+
+.analysis-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.analysis-card{
+background:#17145A;
+padding:25px;
+border-radius:20px;
+text-align:left;
+}
+
+.badge{
+display:inline-block;
+padding:12px 18px;
+border-radius:40px;
+background:rgba(255,255,255,.1);
+margin:8px;
+}
+
+@media(max-width:768px){
+h1{font-size:42px}
+.subtitle{font-size:18px}
+.scenario h2{font-size:28px}
+.scenario p{font-size:17px}
+}
+
+</style>
+</head>
+<body>
+
+<section id="intro" class="screen active center hero">
+
+<img class="logo" src="data:image/png;base64,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">
+
+<h1>The Stakeholders Showdown</h1>
+
+<p class="subtitle">
+A high-pressure enterprise simulation inspired by Crucial Conversations.
+Navigate emotional triggers, stakeholder conflict, executive pressure,
+and psychological safety breakdowns across multiple departments.
+</p>
+
+<div class="intro-grid">
+
+<div class="intro-card">
+<h3>🎯 Mission</h3>
+<p>Align stakeholders while protecting trust, safety, and collaboration.</p>
+</div>
+
+<div class="intro-card">
+<h3>🎮 Gamification</h3>
+<p>Earn XP, unlock badges, and survive escalating executive pressure.</p>
+</div>
+
+<div class="intro-card">
+<h3>🧠 Difficulty</h3>
+<p>Advanced simulation with deceptive choices and emotional traps.</p>
+</div>
+
+</div>
+
+<br><br>
+
+<button class="btn" onclick="startSimulation()">START SIMULATION</button>
+
+</section>
+
+<section id="game" class="screen">
+
+<div style="width:100%">
+
+<div class="topbar">
+
+<div>
+<h2 id="stageTitle">Stage</h2>
+<div class="progress">
+<div class="bar" id="bar"></div>
+</div>
+</div>
+
+<div class="metrics">
+<div class="metric">⭐ XP: <span id="xp">0</span></div>
+<div class="metric">❤️ Trust: <span id="trust">50</span></div>
+<div class="metric">🛡 Safety: <span id="safety">50</span></div>
+<div class="metric">🤝 Shared Meaning: <span id="shared">0</span></div>
+<div class="metric">🔥 Streak: <span id="streak">0</span></div>
+<div class="metric">🏆 Badges: <span id="badgeCount">0</span></div>
+<div class="metric">⚡ Level: <span id="level">1</span></div>
+<div class="metric">⏳ Time Pressure: <span id="timer">20</span>m</div>
+</div>
+
+</div>
+
+<div class="warning" id="warningBox">
+⚠ EXECUTIVE ALERT: Leadership demands alignment within 20 minutes.
+</div>
+
+<div class="scenario">
+<h2 id="scenarioTitle"></h2>
+<p id="scenarioText"></p>
+</div>
+
+<div id="choices"></div>
+
+<div id="feedback" class="feedback"></div>
+
+</div>
+
+</section>
+
+<section id="results" class="screen center">
+
+<div class="results-box">
+
+<img class="logo" src="data:image/png;base64,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">
+
+<h2>Final Leadership Analysis</h2>
+
+<p class="subtitle" id="finalProfile"></p>
+
+<div class="analysis-grid">
+
+<div class="analysis-card">
+<h3>⭐ Final XP</h3>
+<p id="finalXP"></p>
+</div>
+
+<div class="analysis-card">
+<h3>❤️ Trust Level</h3>
+<p id="finalTrust"></p>
+</div>
+
+<div class="analysis-card">
+<h3>🛡 Psychological Safety</h3>
+<p id="finalSafety"></p>
+</div>
+
+<div class="analysis-card">
+<h3>🤝 Shared Meaning</h3>
+<p id="finalShared"></p>
+</div>
+
+<div class="analysis-card">
+<h3>🧠 Communication Pattern</h3>
+<p id="communicationPattern"></p>
+</div>
+
+<div class="analysis-card">
+<h3>⚠ Missed Opportunities</h3>
+<p id="missed"></p>
+</div>
+
+</div>
+
+<br><br>
+
+<div id="earnedBadges"></div>
+<br><br>
+<div class="analysis-grid">
+<div class="analysis-card"><h3>🎖 Achievements</h3><p id="achievements"></p></div>
+</div>
+
+<br><br>
+
+<button class="btn" onclick="location.reload()">PLAY AGAIN</button>
+
+</div>
+
+</section>
+
+<div class="badge-popup" id="badgePopup">
+
+<h2>🏆 Stage Complete</h2>
+
+<p id="badgeText" class="subtitle"></p>
+
+<button class="btn" onclick="nextStage()">CONTINUE</button>
+
+</div>
+
+<script>
+
+let stage=0;
+let question=0;
+
+let xp=0;
+let trust=50;
+let safety=50;
+let shared=0;
+let badges=0;
+let wrongChoices=0;
+let streak=0;
+let level=1;
+
+const stages=[
+
+{
+role:"Marketing Manager",
+badge:"Market Alignment Strategist",
+warning:"⚠ MARKET ALERT: Competitor launch scheduled next week.",
+scenarios:[
+
+{
+title:"Accelerated Timeline",
+text:"Marketing wants an accelerated launch timeline to capture market opportunities quickly.",
+choices:[
+{text:"Facilitate alignment discussion around priorities and launch trade-offs.",xp:25,trust:15,safety:15,shared:20,good:true},
+{text:"Force all departments to follow marketing timelines immediately.",xp:-10,trust:-15,safety:-15,shared:-10,good:false},
+{text:"Delay the discussion and avoid taking a position.",xp:-5,trust:-5,safety:-5,shared:-5,good:false}
+]
+},
+
+{
+title:"Competitor Pressure",
+text:"Senior leadership is pressuring teams after hearing competitor launch rumors.",
+choices:[
+{text:"Push teams aggressively and dismiss concerns.",xp:-10,trust:-15,safety:-15,shared:-10,good:false},
+{text:"Create mutual purpose and align departments around realistic milestones.",xp:30,trust:20,safety:15,shared:25,good:true},
+{text:"Ignore operational readiness risks completely.",xp:-8,trust:-10,safety:-10,shared:-8,good:false}
+]
+}
+
+]
+},
+
+{
+role:"Finance Officer",
+badge:"Financial Alignment Navigator",
+warning:"⚠ BUDGET ALERT: Executive leadership demands cost reductions.",
+scenarios:[
+
+{
+title:"Budget Restrictions",
+text:"Finance demands strict budget control and minimal flexibility for additional resources.",
+choices:[
+{text:"Explore trade-offs collaboratively and ask departments for low-cost alternatives.",xp:25,trust:15,safety:10,shared:20,good:true},
+{text:"Accuse finance of blocking innovation publicly.",xp:-12,trust:-15,safety:-15,shared:-10,good:false},
+{text:"Ignore the budget discussion and move on.",xp:-5,trust:-5,safety:-5,shared:-5,good:false}
+]
+}
+
+]
+},
+
+{
+role:"Operations Supervisor",
+badge:"Operational Resilience Leader",
+warning:"⚠ OPERATIONS ALERT: Burnout risks are increasing rapidly.",
+scenarios:[
+
+{
+title:"Operational Burnout",
+text:"Operations reports severe resource strain and implementation risks.",
+choices:[
+{text:"Discuss phased implementation and workload balancing.",xp:30,trust:20,safety:20,shared:25,good:true},
+{text:"Push harder regardless of burnout concerns.",xp:-15,trust:-15,safety:-20,shared:-10,good:false},
+{text:"Avoid addressing operational pressure.",xp:-8,trust:-8,safety:-10,shared:-5,good:false}
+]
+}
+
+]
+},
+
+{
+role:"Product Development Lead",
+badge:"Quality Protection Expert",
+warning:"⚠ QUALITY ALERT: Testing delays threaten product reputation.",
+scenarios:[
+
+{
+title:"Testing Conflict",
+text:"Product Development insists more testing time is critical for product quality.",
+choices:[
+{text:"Explore critical testing priorities while preserving launch momentum.",xp:30,trust:20,safety:20,shared:25,good:true},
+{text:"Ignore quality concerns and proceed immediately.",xp:-15,trust:-15,safety:-15,shared:-10,good:false},
+{text:"Delay the conversation and avoid responding.",xp:-8,trust:-8,safety:-8,shared:-5,good:false}
+]
+}
+
+]
+},
+
+{
+role:"Sales Team Leader",
+badge:"Customer Empathy Leader",
+warning:"⚠ CUSTOMER ALERT: Key accounts threaten cancellation without requested features.",
+scenarios:[
+
+{
+title:"Customer Demands",
+text:"Customer feedback strongly suggests additional features would significantly boost product success.",
+choices:[
+{text:"Identify which features are essential while balancing operational constraints.",xp:35,trust:25,safety:20,shared:30,good:true},
+{text:"Dismiss customer feedback entirely.",xp:-15,trust:-20,safety:-15,shared:-10,good:false},
+{text:"Avoid discussing customer expectations.",xp:-8,trust:-8,safety:-8,shared:-5,good:false}
+]
+}
+
+]
+}
+
+];
+
+function shuffle(arr){
+return arr.sort(()=>Math.random()-0.5);
+}
+
+function startSimulation(){
+document.getElementById('intro').classList.remove('active');
+document.getElementById('game').classList.add('active');
+loadScenario();
+}
+
+function loadScenario(){
+let currentStage=stages[stage];
+let scenario=currentStage.scenarios[question];
+
+document.getElementById('stageTitle').innerText='Stage '+(stage+1)+' — '+currentStage.role;
+document.getElementById('scenarioTitle').innerText=scenario.title;
+document.getElementById('scenarioText').innerText=scenario.text;
+document.getElementById('warningBox').innerText=currentStage.warning;
+
+document.getElementById('bar').style.width=((stage/stages.length)*100)+'%';
+
+let choices=document.getElementById('choices');
+choices.innerHTML='';
+
+let randomized=[...scenario.choices];
+shuffle(randomized);
+
+randomized.forEach(c=>{
+let div=document.createElement('div');
+div.className='choice';
+div.innerText=c.text;
+div.onclick=()=>pick(c);
+choices.appendChild(div);
+});
+
+}
+
+function pick(c){
+
+xp += c.xp;
+trust += c.trust;
+safety += c.safety;
+shared += c.shared;
+
+if(!c.good){
+wrongChoices++;
+streak=0;
+}else{
+streak++;
+xp += (streak * 2);
+
+if(streak >= 3){
+level++;
+document.getElementById('level').innerText=level;
+}
+}
+
+document.getElementById('streak').innerText=streak;
+
+document.getElementById('xp').innerText=xp;
+document.getElementById('trust').innerText=trust;
+document.getElementById('safety').innerText=safety;
+document.getElementById('shared').innerText=shared;
+
+let feedback=document.getElementById('feedback');
+feedback.style.display='block';
+
+if(c.good){
+feedback.className='feedback good';
+feedback.innerHTML='✅ Strong dialogue behavior. You protected psychological safety and expanded shared meaning.';
+} else {
+feedback.className='feedback bad';
+feedback.innerHTML='❌ This response triggered defensiveness and reduced collaboration.';
+}
+
+setTimeout(()=>{
+feedback.style.display='none';
+
+if(Math.random() > 0.65){
+document.getElementById('bossPopup').style.display='block';
+}
+
+advance();
+},1800);
+
+}
+
+function advance(){
+
+question++;
+
+if(question >= stages[stage].scenarios.length){
+
+badges++;
+document.getElementById('badgeCount').innerText=badges;
+
+document.getElementById('badgeText').innerHTML=
+'You completed the <strong>'+stages[stage].role+
+'</strong> stage and unlocked the <strong>'+stages[stage].badge+'</strong> badge.';
+
+document.getElementById('badgePopup').style.display='block';
+
+} else {
+loadScenario();
+}
+
+}
+
+function nextStage(){
+
+document.getElementById('badgePopup').style.display='none';
+
+stage++;
+question=0;
+
+if(stage >= stages.length){
+showResults();
+} else {
+loadScenario();
+}
+
+}
+
+function showResults(){
+
+document.getElementById('game').classList.remove('active');
+document.getElementById('results').classList.add('active');
+
+let profile='';
+
+if(xp >= 120){
+profile='🏆 Leadership Archetype: Transformational Dialogue Leader.<br><br>You demonstrated advanced emotional regulation, collaboration, empathy, and Crucial Conversations mastery under pressure.';
+}
+else if(xp >= 60){
+profile='💬 Leadership Archetype: Developing Collaborative Leader.<br><br>You handled many situations constructively but still created tension during high-pressure moments.';
+}
+else{
+profile='⚠ Leadership Archetype: Reactive Conflict Handler.<br><br>Your communication style escalated defensiveness and weakened stakeholder trust.';
+}
+
+document.getElementById('finalProfile').innerHTML=profile;
+
+document.getElementById('finalXP').innerText=xp;
+document.getElementById('finalTrust').innerText=trust;
+document.getElementById('finalSafety').innerText=safety;
+document.getElementById('finalShared').innerText=shared;
+
+if(wrongChoices <= 2){
+document.getElementById('communicationPattern').innerText='Emotionally intelligent and dialogue-focused.';
+}
+else{
+document.getElementById('communicationPattern').innerText='Reactive under pressure with inconsistent collaboration.';
+}
+
+document.getElementById('missed').innerText=wrongChoices+' high-risk communication decisions reduced alignment and trust.';
+
+let badgesHTML='';
+
+stages.forEach(s=>{
+badgesHTML += '<span class="badge">'+s.badge+'</span>';
+});
+
+document.getElementById('earnedBadges').innerHTML=badgesHTML;
+
+let achievements='';
+
+if(level >= 3){
+achievements += '⚡ Executive Survivor<br>';
+}
+
+if(streak >= 3){
+achievements += '🔥 Dialogue Combo Master<br>';
+}
+
+if(trust >= 100){
+achievements += '🤝 Trust Builder Elite<br>';
+}
+
+if(achievements === ''){
+achievements = 'No elite achievements unlocked.';
+}
+
+document.getElementById('achievements').innerHTML=achievements;
+
+}
+
+</script>
+
+
+<div class="badge-popup" id="bossPopup">
+<h2>🚨 Executive Escalation</h2>
+<p class="subtitle">
+Senior leadership has entered the conversation.
+Pressure and emotional tension are increasing rapidly.
+</p>
+<button class="btn" onclick="closeBoss()">CONTINUE</button>
+</div>
+
+
+<script>
+
+function closeBoss(){
+document.getElementById('bossPopup').style.display='none';
+}
+
+</script>
+
+</body>
+</html>
