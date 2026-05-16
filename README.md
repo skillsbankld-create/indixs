@@ -1,1 +1,1 @@
-# indixs
+# index
